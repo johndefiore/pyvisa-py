@@ -37,6 +37,18 @@ But this leads to code duplication or an adapter class in your code.
 By using PyVISA as a frontend to many backends, we abstract these things
 from higher level applications.
 
+Pyinstaller can’t find Pyvisa-py, how can I create a standalone executable for distribution to other users?
+-----------------------------------------------------------------------------------------------------------
+
+Pyvisa-py is not technically a valid package name.  Therefore, if you try to import it or if you try to use hiddenimports = [‘pyvisa.py’] in Pyinstaller the executable won’t run. 
+The workaround is to change the name of your local installation of Pyvisa-py to Pyvisa_py.  
+For example you would change your  
+somepath\PythonXX_YY\Lib\site-packages\pyvisa-py 
+to 
+somepath\PythonXX_YY\Lib\site-packages\pyvisa_py.  
+In your project you can then import pyvisa_py and run Pyinstaller as normal and you should get a working executable.
+
+
 
 .. _PySerial: https://pythonhosted.org/pyserial/
 .. _PyVISA: http://pyvisa.readthedocs.org/
